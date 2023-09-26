@@ -18,7 +18,7 @@ TEST(TypewiseAlert, ClassifyTemperatureBreach) {
   ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,0) == BreachType::NORMAL);
   ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,25) == BreachType::NORMAL);
   ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,35) == BreachType::NORMAL);
-  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,36) == BreachType::NORMAL);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,36) == BreachType::TOO_HIGH);
   ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,40) == BreachType::TOO_HIGH);
   ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,45) == BreachType::TOO_HIGH);
   
