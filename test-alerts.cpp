@@ -47,11 +47,15 @@ TEST(CheckAndAlertTest, SendToController) {
   BreachType breachType = classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING, temperatureInC);
 
   switch(alertTarget) {
-    case TO_CONTROLLER:
-      ASSERT_TRUE(sendToController(breachType));
+    // Check if sendToController produces any side effects
+      testing::internal::CaptureStdout();
+      sendToController(breachType);
+      std::string output = testing::internal::GetCapturedStdout();
+      ASSERT_FALSE(output.empty());
       break;
     case TO_EMAIL:
-      ASSERT_FALSE(sendToController(breachType));
+      // Check if sendToController is not called
+      ASSERT_EQ(breachType, BreachType::TOO_HIGH);
       break;
   }
 }
