@@ -41,12 +41,13 @@ TEST(TypewiseAlert, ClassifyTemperatureBreach) {
 
 TEST(CheckAndAlertTest, SendToController) {
   AlertTarget alertTarget = AlertTarget::TO_CONTROLLER;
-  EquipmentCharacter characteristic=;
   double temperatureInC = 25.0;
 
   BreachType breachType = classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING, temperatureInC);
 
-  switch(alertTarget) {
+  switch(alertTarget) 
+  {
+	  case TO_CONTROLLER:
     // Check if sendToController produces any side effects
       testing::internal::CaptureStdout();
       sendToController(breachType);
