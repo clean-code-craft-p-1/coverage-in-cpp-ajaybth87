@@ -4,5 +4,37 @@
 #include "gtest/gtest.h"
 
 TEST(TypewiseAlert, InferBreachAsPerLimits) {
-  ASSERT_TRUE(inferBreach(12.0, 20.0, 30.0) == TOO_LOW);
+  ASSERT_TRUE(inferBreach(0.0, 20.0, 30.0) == BreachType::TOO_LOW);
+  ASSERT_TRUE(inferBreach(12.0, 20.0, 30.0) == BreachType::TOO_LOW);
+  ASSERT_TRUE(inferBreach(20.0, 20.0, 30.0) == BreachType::NORMAL);
+  ASSERT_TRUE(inferBreach(30.0, 20.0, 30.0) == BreachType::NORMAL);
+  ASSERT_TRUE(inferBreach(31.0, 20.0, 30.0) == BreachType::TOO_HIGH);
+  ASSERT_TRUE(inferBreach(50.0, 20.0, 30.0) == BreachType::TOO_HIGH);
+}
+
+TEST(TypewiseAlert, ClassifyTemperatureBreach) {
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,-40) == BreachType::TOO_LOW);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,-1) == BreachType::TOO_LOW);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,0) == BreachType::NORMAL);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,25) == BreachType::NORMAL);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,35) == BreachType::NORMAL);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,36) == BreachType::NORMAL);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,40) == BreachType::TOO_HIGH);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::PASSIVE_COOLING,45) == BreachType::TOO_HIGH);
+  
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::MED_ACTIVE_COOLING,-40) == BreachType::TOO_LOW);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::MED_ACTIVE_COOLING,-1) == BreachType::TOO_LOW);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::MED_ACTIVE_COOLING,0) == BreachType::NORMAL);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::MED_ACTIVE_COOLING,35) == BreachType::NORMAL);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::MED_ACTIVE_COOLING,40) == BreachType::NORMAL);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::MED_ACTIVE_COOLING,41) == BreachType::TOO_HIGH);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::MED_ACTIVE_COOLING,45) == BreachType::TOO_HIGH);
+  
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING,-40) == BreachType::TOO_LOW);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING,-1) == BreachType::TOO_LOW);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING,0) == BreachType::NORMAL);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING,35) == BreachType::NORMAL);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING,45) == BreachType::NORMAL);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING,46) == BreachType::TOO_HIGH);
+  ASSERT_TRUE(classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING,50) == BreachType::TOO_HIGH);
 }
