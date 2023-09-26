@@ -18,9 +18,11 @@ typedef enum {
 BreachType inferBreach(double value, double lowerLimit, double upperLimit);
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
 
-typedef enum {
+typedef enum 
+{
   TO_CONTROLLER,
   TO_EMAIL
+  NONE     //Add new alerter above the NONE.
 } AlertTarget;
 
 typedef struct {

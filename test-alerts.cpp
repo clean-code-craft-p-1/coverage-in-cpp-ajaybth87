@@ -39,7 +39,7 @@ TEST(TypewiseAlert, ClassifyTemperatureBreach) {
   ASSERT_TRUE(classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING,50) == BreachType::TOO_HIGH);
 }
 
-TEST(CheckAndAlertTest, SendToController) 
+TEST(TypewiseAlert, SendToController) 
 {
   AlertTarget alertTarget = TO_CONTROLLER;
   double temperatureInC = 25.0;
@@ -58,7 +58,7 @@ TEST(CheckAndAlertTest, SendToController)
   }
 }
 
-TEST(CheckAndAlertTest, sendToEmail)
+TEST(TypewiseAlert, sendToEmail)
 {
   AlertTarget alertTarget = TO_EMAIL;
 
@@ -78,4 +78,27 @@ TEST(CheckAndAlertTest, sendToEmail)
 	  ASSERT_TRUE(OK==sendToEmail(breachType3));
       break;
   }
+}
+
+TEST(TypewiseAlert,CheckAndAlertTest)
+{
+  AlertTarget alertTarget;
+  EquipmentCharacter characteristic;
+  double temperatureInC
+  
+  alertTarget=AlertTarget::NONE;
+  characteristic.coolingType=CoolingType::PASSIVE_COOLING;
+  temp=10;
+  ASSERT_TRUE(NOK==checkAndAlert(alertTarget, characteristic, temp); 
+  
+  alertTarget=AlertTarget::TO_EMAIL;
+  characteristic.coolingType=CoolingType::PASSIVE_COOLING;
+  temp=10;
+  ASSERT_TRUE(OK==checkAndAlert(alertTarget, characteristic, temp);
+  
+  alertTarget=AlertTarget::TO_CONTROLLER;
+  characteristic.coolingType=CoolingType::PASSIVE_COOLING;
+  temp=10;
+  ASSERT_TRUE(OK==checkAndAlert(alertTarget, characteristic, temp);
+
 }
