@@ -40,10 +40,10 @@ void checkAndAlert(AlertTarget alertTarget, EquipmentCharacter characteristic, d
   BreachType breachType = classifyTemperatureBreach(characteristic.coolingType, temperatureInC);
 
   switch(alertTarget) {
-    case TO_CONTROLLER:
+    case AlertTarget::TO_CONTROLLER:
       sendToController(breachType);
       break;
-    case TO_EMAIL:
+    case AlertTarget::TO_EMAIL:
       sendToEmail(breachType);
       break;
   }
