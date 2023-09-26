@@ -82,23 +82,23 @@ TEST(TypewiseAlert, sendToEmail)
 
 TEST(TypewiseAlert,CheckAndAlertTest)
 {
-  AlertTarget alertTarget;
-  EquipmentCharacter characteristic;
+  AlertTarget alertTarget={};
+  EquipmentCharacter characteristic={};
   double temperatureInC
   
   alertTarget=AlertTarget::NONE;
   characteristic.coolingType=CoolingType::PASSIVE_COOLING;
-  temp=10;
-  ASSERT_TRUE(NOK==checkAndAlert(alertTarget, characteristic, temp); 
+  temperatureInC=10;
+  ASSERT_TRUE(NOK==checkAndAlert(alertTarget, characteristic, temperatureInC); 
   
   alertTarget=AlertTarget::TO_EMAIL;
   characteristic.coolingType=CoolingType::PASSIVE_COOLING;
-  temp=10;
-  ASSERT_TRUE(OK==checkAndAlert(alertTarget, characteristic, temp);
+  temperatureInC=10;
+  ASSERT_TRUE(OK==checkAndAlert(alertTarget, characteristic, temperatureInC);
   
   alertTarget=AlertTarget::TO_CONTROLLER;
   characteristic.coolingType=CoolingType::PASSIVE_COOLING;
-  temp=10;
-  ASSERT_TRUE(OK==checkAndAlert(alertTarget, characteristic, temp);
+  temperatureInC=10;
+  ASSERT_TRUE(OK==checkAndAlert(alertTarget, characteristic, temperatureInC);
 
 }
