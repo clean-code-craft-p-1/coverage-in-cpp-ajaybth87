@@ -53,7 +53,7 @@ TEST(CheckAndAlertTest, SendToController)
       break;
     case TO_EMAIL:
       // Check if sendToController is not called
-      ASSERT_EQ(breachType, " ");
+      ASSERT_TRUE(breachType==BreachType::TOO_HIGH);
       break;
   }
 }
@@ -70,10 +70,9 @@ TEST(CheckAndAlertTest, sendToEmail)
   {
 	case TO_CONTROLLER:
        // Check if sendToEmail is not called
-      ASSERT_EQ(breachType, " ");
+      ASSERT_TRUE(breachType1, BreachType::TOO_HIGH);
       break;
     case TO_EMAIL:
-     
       ASSERT_TRUE(OK==sendToEmail(breachType1));
 	  ASSERT_TRUE(OK==sendToEmail(breachType2));
 	  ASSERT_TRUE(OK==sendToEmail(breachType3));
