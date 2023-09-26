@@ -70,7 +70,7 @@ TEST(CheckAndAlertTest, sendToEmail)
   {
 	case TO_CONTROLLER:
        // Check if sendToEmail is not called
-      ASSERT_TRUE(breachType1, BreachType::TOO_HIGH);
+      ASSERT_TRUE(breachType1==BreachType::TOO_HIGH);
       break;
     case TO_EMAIL:
       ASSERT_TRUE(OK==sendToEmail(breachType1));
