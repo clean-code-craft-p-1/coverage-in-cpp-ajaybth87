@@ -1,0 +1,21 @@
+name: Build and Run
+
+on: [push, pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: setup cmake
+      run: sudo apt install cmake
+
+    - name: build
+      run: |
+        cmake -S . -B build
+        cmake --build build
+      
+    - name: run
+      run: build/test-alerts
