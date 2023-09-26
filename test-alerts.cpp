@@ -84,21 +84,21 @@ TEST(TypewiseAlert,CheckAndAlertTest)
 {
   AlertTarget alertTarget={};
   EquipmentCharacter characteristic={};
-  double temperatureInC
+  double temperatureInC=0;
   
   alertTarget=AlertTarget::NONE;
   characteristic.coolingType=CoolingType::PASSIVE_COOLING;
   temperatureInC=10;
-  ASSERT_TRUE(NOK==checkAndAlert(alertTarget, characteristic, temperatureInC); 
+  ASSERT_TRUE(NOK==checkAndAlert(alertTarget, characteristic, temperatureInC)); 
   
   alertTarget=AlertTarget::TO_EMAIL;
   characteristic.coolingType=CoolingType::PASSIVE_COOLING;
   temperatureInC=10;
-  ASSERT_TRUE(OK==checkAndAlert(alertTarget, characteristic, temperatureInC);
+  ASSERT_TRUE(OK==checkAndAlert(alertTarget, characteristic, temperatureInC));
   
   alertTarget=AlertTarget::TO_CONTROLLER;
   characteristic.coolingType=CoolingType::PASSIVE_COOLING;
   temperatureInC=10;
-  ASSERT_TRUE(OK==checkAndAlert(alertTarget, characteristic, temperatureInC);
+  ASSERT_TRUE(OK==checkAndAlert(alertTarget, characteristic, temperatureInC));
 
 }
