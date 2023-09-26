@@ -39,7 +39,8 @@ TEST(TypewiseAlert, ClassifyTemperatureBreach) {
   ASSERT_TRUE(classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING,50) == BreachType::TOO_HIGH);
 }
 
-TEST(CheckAndAlertTest, SendToController) {
+TEST(CheckAndAlertTest, SendToController) 
+{
   AlertTarget alertTarget = TO_CONTROLLER;
   double temperatureInC = 25.0;
 
@@ -52,7 +53,30 @@ TEST(CheckAndAlertTest, SendToController) {
       break;
     case TO_EMAIL:
       // Check if sendToController is not called
-      ASSERT_EQ(breachType, BreachType::TOO_HIGH);
+      ASSERT_EQ(breachType, " ");
+      break;
+  }
+}
+
+TEST(CheckAndAlertTest, sendToEmail)
+{
+  AlertTarget alertTarget = TO_EMAIL;
+
+  BreachType breachType1 = classifyTemperatureBreach(CoolingType::PASSIVE_COOLING, -1);
+  BreachType breachType2 = classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING, 46);
+  BreachType breachType3 = classifyTemperatureBreach(CoolingType::MED_ACTIVE_COOLING, 35);
+
+  switch(alertTarget) 
+  {
+	case TO_CONTROLLER:
+       // Check if sendToEmail is not called
+      ASSERT_EQ(breachType, " ");
+      break;
+    case TO_EMAIL:
+     
+      ASSERT_EQ(OK==sendToEmail(breachType1));
+	  ASSERT_EQ(OK==sendToEmail(breachType2));
+	  ASSERT_EQ(OK==sendToEmail(breachType3));
       break;
   }
 }
