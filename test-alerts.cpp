@@ -47,14 +47,14 @@ TEST(CheckAndAlertTest, SendToController) {
 
   switch(alertTarget) 
   {
-	  case TO_CONTROLLER:
+	case AlertTarget::TO_CONTROLLER:
     // Check if sendToController produces any side effects
       testing::internal::CaptureStdout();
       sendToController(breachType);
       std::string output = testing::internal::GetCapturedStdout();
       ASSERT_FALSE(output.empty());
       break;
-    case TO_EMAIL:
+    case AlertTarget::TO_EMAIL:
       // Check if sendToController is not called
       ASSERT_EQ(breachType, BreachType::TOO_HIGH);
       break;
