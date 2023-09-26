@@ -38,3 +38,20 @@ TEST(TypewiseAlert, ClassifyTemperatureBreach) {
   ASSERT_TRUE(classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING,46) == BreachType::TOO_HIGH);
   ASSERT_TRUE(classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING,50) == BreachType::TOO_HIGH);
 }
+
+TEST(CheckAndAlertTest, SendToController) {
+  AlertTarget alertTarget = AlertTarget::TO_CONTROLLER;
+  EquipmentCharacter characteristic=;
+  double temperatureInC = 25.0;
+
+  BreachType breachType = classifyTemperatureBreach(CoolingType::HI_ACTIVE_COOLING, temperatureInC);
+
+  switch(alertTarget) {
+    case TO_CONTROLLER:
+      ASSERT_TRUE(sendToController(breachType));
+      break;
+    case TO_EMAIL:
+      ASSERT_FALSE(sendToController(breachType));
+      break;
+  }
+}
