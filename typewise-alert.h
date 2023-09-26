@@ -1,5 +1,8 @@
 #pragma once
 
+#define OK  0
+#define NOK 1
+
 typedef enum {
   PASSIVE_COOLING,
   HI_ACTIVE_COOLING,
@@ -15,9 +18,11 @@ typedef enum {
 BreachType inferBreach(double value, double lowerLimit, double upperLimit);
 BreachType classifyTemperatureBreach(CoolingType coolingType, double temperatureInC);
 
-typedef enum {
+typedef enum 
+{
   TO_CONTROLLER,
-  TO_EMAIL
+  TO_EMAIL,
+  NONE     //Add new alerter above the NONE.
 } AlertTarget;
 
 typedef struct {
@@ -25,8 +30,8 @@ typedef struct {
   char brand[48];
 } EquipmentCharacter;
 
-void checkAndAlert(
+int checkAndAlert(
   AlertTarget alertTarget, EquipmentCharacter characteristic, double temperatureInC);
 
-void sendToController(BreachType breachType);
-void sendToEmail(BreachType breachType);
+int sendToController(BreachType breachType);
+int sendToEmail(BreachType breachType);
